@@ -1,0 +1,56 @@
+<div class="row">
+    <div class="col-sm-6 col-md-6 col-md-offset-3 col-sm-offset-3">
+        {{# if error}}
+            <div class="alert alert-warning col-md-offset-3 col-md-9">
+                Either key or value is invalid.
+            </div>
+        {{/if}}
+
+        <form class="form-horizontal" action="/redis/string" method="post">
+            <div class="form-group">
+                <label class="control-label col-sm-3" for="redis-string-key">Enter Key:</label>
+                <div class="col-sm-9">
+                    <input type="text" class="form-control" id="redis-string-key" placeholder="Enter Redis Key" name="redis-string-key" {{# if key}} value="{{key}}"  readonly{{/if}}>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-sm-3" for="redis-string-value">Enter Value:</label>
+                <div class="col-sm-9">
+                    <input type="text" class="form-control" id="redis-string-value" placeholder="Enter Redis Value" name="redis-string-value" {{# if value}} value="{{value}}"  {{/if}}>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-offset-3 col-sm-9">
+                    <button type="submit" class="btn btn-default">Save</button>
+                    {{# if key }}<a href="/redis/string"><button type="submit" class="btn btn-default">New Entry</button></a>{{/if}}
+                </div>
+            </div>
+        </form>
+    </div>
+
+</div>
+<div class="row">
+    <div class="col-sm-6 col-md-6 col-md-offset-3 col-sm-offset-3">
+        <table class="table table-stripped table-bordered table-condensed table-hover">
+            <thead>
+                <tr>
+                    <th>Key</th>
+                    <th>Value</th>
+                </tr>
+            </thead>
+            <tbody>
+                {{#each data}}
+                    <tr>
+                        <td>{{@key}}</td>
+                        <td>{{this}}<a href="/redis/string?key={{@key}}&value={{this}}"><button type="button" class="btn btn-default btn-xs pull-right">Edit</button></a></td>
+                    </tr>
+                {{/each}}
+
+            </tbody>
+
+        </table>
+
+    </div>
+</div>
+
+
