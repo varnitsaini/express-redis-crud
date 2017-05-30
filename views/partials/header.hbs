@@ -15,10 +15,10 @@
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
                 <!--<li class="active"><a href="#">Strings <span class="sr-only">(current)</span></a></li>-->
-                <li ><a href="/redis/string">Strings</a></li>
-                <!--<li><a href="/redis/hash">Hash</a></li>-->
+                <li {{#if redisString}}class="active"{{/if}} ><a href="/redis/string">Strings</a></li>
+                <li {{#if redisHash}}class="active"{{/if}} ><a href="/redis/hash">Hash</a></li>
+                <li {{#if redisSets}}class="active"{{/if}}>  <a href="/redis/sets">Sets</a></li>
                 <!--<li><a href="/redis/list">List</a></li>-->
-                <!--<li><a href="/redis/set">Set</a></li>-->
                 <!--<li><a href="/redis/sorted-set">Sorted Set</a></li>-->
             </ul>
         </div><!-- /.navbar-collapse -->

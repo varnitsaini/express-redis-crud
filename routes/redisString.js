@@ -16,6 +16,7 @@ router.post('/', function (req, res, next) {
     if(!stringKey || !stringValue){
         error = "Invalid key or value."
     }else{
+        //here callback is used to save values
         redisclient.set(stringKey, stringValue, function (err, success) {
             if(err){
                 error = err;
@@ -50,8 +51,14 @@ router.get('/', function (req, res, next) {
         error = req.query.error;
     }
 
+    //here promise is used to fetch values
     redisclient.getAsync('all').then(function (data) {
-        var keys = data.split("|");
+        try{
+            var keys = data.split("|");
+        }catch(e) {
+            return null;
+        }
+
         return redisclient.mgetAsync(keys).then(function (result) {
             var arr = {};
             for(let i=0;i<result.length;i++){
@@ -63,7 +70,7 @@ router.get('/', function (req, res, next) {
             return arr;
         });
     }).then(function (result) {
-        res.render('views/redisString', {data: result, key: key, value: value, error:error});
+        res.render('views/redisString', {data: result, key: key, value: value, error:error, redisString:true});
     });
 });
 

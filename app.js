@@ -10,6 +10,8 @@ var index = require('./routes/index');
 var users = require('./routes/users');
 var redisRoute = require('./routes/redis');
 var redisStringRoute = require('./routes/redisString');
+var redisHashRoute = require('./routes/redisHash');
+var redisSetsRoute = require('./routes/redisSets');
 
 
 var app = express();
@@ -21,6 +23,7 @@ var app = express();
 // app.set('view engine', 'hbs');
 app.engine('.hbs', exphbs({defaultLayout: 'main', extname: '.hbs'}));
 app.set('view engine', '.hbs');
+
 
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
@@ -34,6 +37,8 @@ app.use('/', index);
 app.use('/users', users);
 app.use('/redis', redisRoute);
 app.use('/redis/string', redisStringRoute);
+app.use('/redis/hash', redisHashRoute);
+app.use('/redis/sets', redisSetsRoute);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
